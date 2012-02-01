@@ -93,7 +93,11 @@
 					<tr>
 					  <td><?php echo lang('group');?></td>
 					  <td><?php echo form_dropdown('group_id', $group_list, set_value('group_id',$group_id)); ?></td>
-				  </tr>
+				  	</tr>
+				  	<tr>
+					  <td><?php// echo lang('columns');?>Pricing Column</td>
+					  <td><?php echo form_dropdown('price_col', $price_cols, set_value('price_col',$price_col_group)); ?></td>
+				  	</tr>
 				</table>
 		  </td>
 		

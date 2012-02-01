@@ -18,19 +18,27 @@ function areyousure()
 				<th><?php echo lang('name');?></th>
 				<th style="width:60px;"><?php echo lang('price');?></th>
 				<th style="width:60px;"><?php echo lang('saleprice');?></th>
+				<th style="width:60px;"><?php echo lang('price_col_A');?></th>
+				<th style="width:60px;"><?php echo lang('price_col_B');?></th>
+				<th style="width:60px;"><?php echo lang('price_col_C');?></th>
+				<th style="width:60px;"><?php echo lang('price_col_D');?></th>
 				<th style="width:60px;"><?php echo lang('quantity');?></th>
 				<th style="width:60px;"><?php echo lang('enabled');?></th>
 				<th class="gc_cell_right"></th>
 			</tr>
 		</thead>
 		<tbody>
-		<?php echo (count($products) < 1)?'<tr><td style="text-align:center;" colspan="6">'.lang('no_products').'</td></tr>':''?>
+		<?php echo (count($products) < 1)?'<tr><td style="text-align:center;" colspan="10">'.lang('no_products').'</td></tr>':''?>
 	<?php foreach ($products as $product):?>
 			<tr class="gc_row">
 				<td><?php echo form_input(array('name'=>'product['.$product->id.'][sku]','value'=>form_decode($product->sku), 'class'=>'gc_tf3'));?></td>
 				<td><?php echo form_input(array('name'=>'product['.$product->id.'][name]','value'=>form_decode($product->name), 'class'=>'gc_tf3'));?></td>
 				<td><?php echo form_input(array('name'=>'product['.$product->id.'][price]', 'value'=>set_value('price', $product->price), 'class'=>'gc_tf3'));?></td>
 				<td><?php echo form_input(array('name'=>'product['.$product->id.'][saleprice]', 'value'=>set_value('saleprice', $product->saleprice), 'class'=>'gc_tf3'));?></td>
+				<td><?php echo form_input(array('name'=>'product['.$product->id.'][price_col_A]', 'value'=>set_value('price_col_A', $product->price_col_A), 'class'=>'gc_tf3'));?></td>
+				<td><?php echo form_input(array('name'=>'product['.$product->id.'][price_col_B]', 'value'=>set_value('price_col_B', $product->price_col_B), 'class'=>'gc_tf3'));?></td>
+				<td><?php echo form_input(array('name'=>'product['.$product->id.'][price_col_C]', 'value'=>set_value('price_col_C', $product->price_col_C), 'class'=>'gc_tf3'));?></td>
+				<td><?php echo form_input(array('name'=>'product['.$product->id.'][price_col_D]', 'value'=>set_value('price_col_D', $product->price_col_D), 'class'=>'gc_tf3'));?></td>
 				<td><?php echo ((bool)$product->track_stock)?form_input(array('name'=>'product['.$product->id.'][quantity]', 'value'=>set_value('quantity', $product->quantity), 'class'=>'gc_tf3')):'N/A';?></td>
 				<td>
 					<?php

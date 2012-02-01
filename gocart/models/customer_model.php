@@ -168,6 +168,28 @@ Class Customer_model extends CI_Model
 		}
 	}
 	
+	function get_price_col()
+	{
+		$customer = $this->go_cart->customer();
+		
+		if ($result = $this->get_customer($customer['id'])) //if customer can be loaded (effectively means, if the customer is logged in...)
+		{
+		
+			if ($result->price_col_group) //if price_column is found
+			{
+				return $result->price_col_group;
+			}
+			else //if customer has no price column
+			{
+				return FALSE;
+			}
+		}
+		else //if customer cannot be found (is not logged in)
+		{
+			return FALSE;
+		}
+	}
+	
 	
 	/*
 	these functions handle logging in and out

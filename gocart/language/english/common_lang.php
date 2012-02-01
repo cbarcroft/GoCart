@@ -69,6 +69,7 @@ $lang['no_image_available']		= 'No Image Available';
 $lang['product_reg']			= 'reg:';
 $lang['product_price']			= 'Price:';
 $lang['product_sale']			= 'SALE:';
+$lang['product_column_price']	= 'Your Price:';
 $lang['available_options']		= 'Available Options';
 $lang['choose_option']			= 'Choose an Option';
 $lang['tab_description']		= 'Description';

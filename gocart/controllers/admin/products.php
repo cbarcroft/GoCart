@@ -67,6 +67,10 @@ class Products extends Admin_Controller {
 		$data['excerpt']			= '';
 		$data['price']				= '';
 		$data['saleprice']			= '';
+		$data['price_col_A']		= '';
+		$data['price_col_B']		= '';
+		$data['price_col_C']		= '';
+		$data['price_col_D']		= '';
 		$data['weight']				= '';
 		$data['track_stock'] 		= '';
 		$data['seo_title']			= '';
@@ -118,6 +122,10 @@ class Products extends Admin_Controller {
 			$data['excerpt']			= $product->excerpt;
 			$data['price']				= $product->price;
 			$data['saleprice']			= $product->saleprice;
+			$data['price_col_A']		= $product->price_col_A;
+			$data['price_col_B']		= $product->price_col_B;
+			$data['price_col_C']		= $product->price_col_C;
+			$data['price_col_D']		= $product->price_col_D;
 			$data['weight']				= $product->weight;
 			$data['track_stock'] 		= $product->track_stock;
 			$data['shippable']			= $product->shippable;
@@ -158,6 +166,10 @@ class Products extends Admin_Controller {
 		$this->form_validation->set_rules('excerpt', 'lang:excerpt', 'trim');
 		$this->form_validation->set_rules('price', 'lang:price', 'trim|numeric|floatval');
 		$this->form_validation->set_rules('saleprice', 'lang:saleprice', 'trim|numeric|floatval');
+		$this->form_validation->set_rules('price_col_A', 'lang:price_col_A', 'trim|numeric|floatval');
+		$this->form_validation->set_rules('price_col_B', 'lang:price_col_B', 'trim|numeric|floatval');
+		$this->form_validation->set_rules('price_col_C', 'lang:price_col_C', 'trim|numeric|floatval');
+		$this->form_validation->set_rules('price_col_D', 'lang:price_col_D', 'trim|numeric|floatval');
 		$this->form_validation->set_rules('weight', 'lang:weight', 'trim|numeric|floatval');
 		$this->form_validation->set_rules('track_stock', 'lang:track_stock', 'trim|numeric');
 		$this->form_validation->set_rules('quantity', 'lang:quantity', 'trim|numeric');
@@ -233,6 +245,10 @@ class Products extends Admin_Controller {
 			$save['excerpt']			= $this->input->post('excerpt');
 			$save['price']				= $this->input->post('price');
 			$save['saleprice']			= $this->input->post('saleprice');
+			$save['price_col_A']		= $this->input->post('price_col_A');
+			$save['price_col_B']		= $this->input->post('price_col_B');
+			$save['price_col_C']		= $this->input->post('price_col_C');
+			$save['price_col_D']		= $this->input->post('price_col_D');
 			$save['weight']				= $this->input->post('weight');
 			$save['track_stock']		= $this->input->post('track_stock');
 			$save['fixed_quantity']		= $this->input->post('fixed_quantity');

@@ -246,9 +246,37 @@ function delete_product_option(id)
 		?>
 		</div>
 		<div class="gc_field2">
-		<label for="price"><?php echo lang('saleprice');?> </label>
+		<label for="saleprice"><?php echo lang('saleprice');?> </label>
 		<?php
 		$data	= array('id'=>'saleprice', 'name'=>'saleprice', 'value'=>set_value('saleprice', $saleprice), 'class'=>'gc_tf1');
+		echo form_input($data);
+		?>
+		</div>
+		<div class="gc_field2">
+		<label for="price_col_A"><?php echo lang('price_col_A');?> </label>
+		<?php
+		$data	= array('id'=>'price_col_A', 'name'=>'price_col_A', 'value'=>set_value('price_col_A', $price_col_A), 'class'=>'gc_tf1');
+		echo form_input($data);
+		?>
+		</div>
+		<div class="gc_field2">
+		<label for="price_col_B"><?php echo lang('price_col_B');?> </label>
+		<?php
+		$data	= array('id'=>'price_col_B', 'name'=>'price_col_B', 'value'=>set_value('price_col_B', $price_col_B), 'class'=>'gc_tf1');
+		echo form_input($data);
+		?>
+		</div>
+		<div class="gc_field2">
+		<label for="price_col_C"><?php echo lang('price_col_C');?> </label>
+		<?php
+		$data	= array('id'=>'price_col_C', 'name'=>'price_col_C', 'value'=>set_value('price_col_C', $price_col_C), 'class'=>'gc_tf1');
+		echo form_input($data);
+		?>
+		</div>
+		<div class="gc_field2">
+		<label for="price_col_D"><?php echo lang('price_col_D');?> </label>
+		<?php
+		$data	= array('id'=>'price_col_D', 'name'=>'price_col_D', 'value'=>set_value('price_col_D', $price_col_D), 'class'=>'gc_tf1');
 		echo form_input($data);
 		?>
 		</div>

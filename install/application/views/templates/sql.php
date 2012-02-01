@@ -193,6 +193,7 @@ CREATE TABLE `prefix_customers` (
   `active` tinyint(1) NOT NULL,
   `group_id` int(11) NOT NULL default '1',
   `confirmed` tinyint(1) NOT NULL default '0',
+  `price_col_group` varchar(1) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
@@ -381,6 +382,10 @@ CREATE TABLE `prefix_products` (
   `excerpt` text,
   `price` float(10,2) NOT NULL default '0.00',
   `saleprice` float(10,2) NOT NULL default '0.00',
+  `price_col_A` float(10,2) NOT NULL default '0.00',
+  `price_col_B` float(10,2) NOT NULL default '0.00',
+  `price_col_C` float(10,2) NOT NULL default '0.00',
+  `price_col_D` float(10,2) NOT NULL default '0.00',
   `free_shipping` tinyint(1) NOT NULL default '0',
   `shippable` tinyint(1) NOT NULL default '1',
   `taxable` tinyint(1) NOT NULL default '1',

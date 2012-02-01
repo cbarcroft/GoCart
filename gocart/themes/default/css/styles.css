@@ -732,6 +732,12 @@ h2 {
 	font-size:14px;
 }
 
+.price_column {
+	font-weight:bold;
+	color:blue;
+	font-size:14px;
+}
+
 .price_reg {
 	font-weight:bold;
 	font-size:14px;

@@ -4,7 +4,11 @@ Class Product_model extends CI_Model
 		
 	// we will store the group discount formula here
 	// and apply it to product prices as they are fetched 
+
+	var $price_col_group = FALSE;
 	var $group_discount_formula = false;
+	var $oldprice = NULL;
+
 	
 	function __construct()
 	{
@@ -12,10 +16,18 @@ Class Product_model extends CI_Model
 		
 		// check for possible group discount 
 		$customer = $this->session->userdata('customer');
+		$price_col_group = $this->session->userdata['cart_contents']['customer']['price_col_group'];
+		
 		if(isset($customer['group_discount_formula'])) 
 		{
 			$this->group_discount_formula = $customer['group_discount_formula'];
 		}
+		
+		if($price_col_group != NULL && $price_col_group != '') //add IS NOT ADMIN check of some sort, causes trouble when logged in both front and back end
+		{
+			$this->price_col_group = $price_col_group;
+		}
+		
 	}
 
 	function get_products($category_id = false, $limit = false, $offset = false)
@@ -45,8 +57,20 @@ Class Product_model extends CI_Model
 			//sort by alphabetically by default
 			$this->db->order_by('name', 'ASC');
 			$result	= $this->db->get('products');
-			//apply group discount
+			
 			$return = $result->result();
+			
+			//Price by column
+			if($this->price_col_group)
+			{
+				foreach($return as &$product) {
+					$price_col = 'price_col_' . $this->price_col_group;
+					$new_price = $this->db->select($price_col)->from('products')->where(array('id'=> $product->id))->get()->result();
+					$product->price = $new_price[0]->$price_col;
+				}
+			}
+			
+			//Group discount
 			if($this->group_discount_formula) 
 			{
 				foreach($return as &$product) {
@@ -73,11 +97,22 @@ Class Product_model extends CI_Model
 		
 		$result->categories = $this->get_product_categories($result->id);
 		
+		
+		// Get price by column
+		if($this->price_col_group)
+		{
+			$price_col = 'price_col_' . $this->price_col_group;
+			$new_price = $this->db->select($price_col)->from('products')->where(array('id'=> $id))->get()->result();
+			$result->oldprice = $result->price;
+			$result->price = $new_price[0]->$price_col;
+		}
+		
 		// group discount?
 		if($this->group_discount_formula) 
 		{
 			eval('$result->price=$result->price'.$this->group_discount_formula.';');
 		}
+		
 		return $result;
 	}
 

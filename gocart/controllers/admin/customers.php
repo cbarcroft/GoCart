@@ -68,6 +68,7 @@ class Customers extends Admin_Controller {
 		$data['phone']				= '';
 		$data['company']			= '';
 		$data['email_subscribe']	= '';
+		$data['price_col_group']	= '';
 		$data['active']				= false;
 				
 		// get group list
@@ -77,6 +78,10 @@ class Customers extends Admin_Controller {
 			$group_list[$group->id] = $group->name;
 		}
 		$data['group_list'] = $group_list;
+		
+		$price_cols = array('' => '', 'A' => 'A','B' => 'B','C' => 'C', 'D' => 'D');
+		
+		$data['price_cols'] = $price_cols;
 		
 		
 		
@@ -101,6 +106,7 @@ class Customers extends Admin_Controller {
 			$data['company']			= $customer->company;
 			$data['active']				= $customer->active;
 			$data['email_subscribe']	= $customer->email_subscribe;
+			$data['price_col_group']	= $customer->price_col_group;
 			
 		}
 		
@@ -111,6 +117,7 @@ class Customers extends Admin_Controller {
 		$this->form_validation->set_rules('company', 'lang:company', 'trim|max_length[128]');
 		$this->form_validation->set_rules('active', 'lang:active');
 		$this->form_validation->set_rules('group_id', 'group_id', 'numeric');
+		//$this->form_validation->set_rules('price_col_group', 'lang:company', 'trim|max_length[128]');
 		$this->form_validation->set_rules('email_subscribe', 'email_subscribe', 'numeric|max_length[1]');
 		
 		//if this is a new account require a password, or if they have entered either a password or a password confirmation
@@ -136,6 +143,7 @@ class Customers extends Admin_Controller {
 			$save['company']	= $this->input->post('company');
 			$save['active']		= $this->input->post('active');
 			$save['email_subscribe'] = $this->input->post('email_subscribe');
+			$save['price_col_group'] = $this->input->post('price_col');
 
 			
 			if ($this->input->post('password') != '' || !$id)
