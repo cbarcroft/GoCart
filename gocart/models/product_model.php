@@ -291,7 +291,7 @@ Class Product_model extends CI_Model
 
 		$product = array();
 
-		if ($db_product->saleprice > 0.00)  //if saleprice is in effect
+		if ($db_product->saleprice > 0.00)  //if saleprice is in effect, it will take precedence
 		{ 
 			$product['price']	= $db_product->saleprice;
 		}
@@ -303,7 +303,7 @@ Class Product_model extends CI_Model
 		{
 			$product['price']	= $db_product->price;
 		}
-
+		
 		$product['base_price'] 		= $product['price']; // price gets modified by options, show the baseline still...
 		$product['id']				= $db_product->id;
 		$product['name']			= $db_product->name;
