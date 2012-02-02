@@ -16,13 +16,17 @@ Class Product_model extends CI_Model
 		
 		// check for possible group discount 
 		$customer = $this->session->userdata('customer');
-		$price_col_group = $this->session->userdata['cart_contents']['customer']['price_col_group'];
+		
+		if (isset($this->session->userdata['cart_contents']))
+		{
+			$price_col_group = $this->session->userdata['cart_contents']['customer']['price_col_group'];
+		}
 		
 		if(isset($customer['group_discount_formula'])) 
 		{
 			$this->group_discount_formula = $customer['group_discount_formula'];
 		}
-		
+
 		if($price_col_group != NULL && $price_col_group != '') //add IS NOT ADMIN check of some sort, causes trouble when logged in both front and back end
 		{
 			$this->price_col_group = $price_col_group;
@@ -48,8 +52,8 @@ Class Product_model extends CI_Model
 
 				$contents[$count]	= $this->get_product($product->product_id);
 				$count++;
+				
 			}
-
 			return $contents;
 		}
 		else
@@ -98,14 +102,16 @@ Class Product_model extends CI_Model
 		$result->categories = $this->get_product_categories($result->id);
 		
 		
-		// Get price by column
+		//Get price by column
+		/*
 		if($this->price_col_group)
 		{
 			$price_col = 'price_col_' . $this->price_col_group;
 			$new_price = $this->db->select($price_col)->from('products')->where(array('id'=> $id))->get()->result();
-			$result->oldprice = $result->price;
 			$result->price = $new_price[0]->$price_col;
 		}
+		*/
+		
 		
 		// group discount?
 		if($this->group_discount_formula) 
@@ -275,24 +281,29 @@ Class Product_model extends CI_Model
 	}
 
 	// Build a cart-ready product array
-	function get_cart_ready_product($id, $quantity=false)
+	function get_cart_ready_product($id, $quantity=false, $user_price_col=false)
 	{
 		$db_product			= $this->get_product($id);
 		if( ! $db_product)
 		{
 			return false;
 		}
-		
+
 		$product = array();
-		
-		if ($db_product->saleprice == 0.00) { 
-			$product['price']	= $db_product->price;
-		}
-		else
-		{
+
+		if ($db_product->saleprice > 0.00)  //if saleprice is in effect
+		{ 
 			$product['price']	= $db_product->saleprice;
 		}
-		
+		else if($user_price_col) //otherwise, check for column pricing
+		{
+			$product['price'] = $db_product->$user_price_col;
+		}
+		else//if no special conditions, take regular price
+		{
+			$product['price']	= $db_product->price;
+		}
+
 		$product['base_price'] 		= $product['price']; // price gets modified by options, show the baseline still...
 		$product['id']				= $db_product->id;
 		$product['name']			= $db_product->name;

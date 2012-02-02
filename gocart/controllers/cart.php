@@ -218,9 +218,10 @@ class Cart extends CI_Controller {
 		$quantity 		= $this->input->post('quantity');
 		$post_options 	= $this->input->post('option');
 		$cartkey		= $this->input->post('cartkey');
-		
+		$user_price_col = "price_col_" . $this->Product_model->price_col_group;
+
 		// Get a cart-ready product array
-		$product = $this->Product_model->get_cart_ready_product($product_id, $quantity);
+		$product = $this->Product_model->get_cart_ready_product($product_id, $quantity, $user_price_col);
 		
 		//if out of stock purchase is disabled, check to make sure there is inventory to support the cart.
 		if(!$this->config->item('allow_os_purchase') && (bool)$product['track_stock'])

@@ -110,7 +110,7 @@
 						<span class="price_slash"><?php echo lang('product_reg');?> <?php echo format_currency($product->price); ?></span>
 						<span class="price_sale"><?php echo lang('product_sale');?> <?php echo format_currency($product->saleprice); ?></span>
 					<?php elseif($this->Customer_model->get_price_col() != NULL): $price_col = "price_col_" . $this->Customer_model->get_price_col(); ?>
-						<span class="price_slash"><?php echo lang('product_reg');?> <?php echo format_currency($product->oldprice); ?></span>
+						<span class="price_slash"><?php echo lang('product_reg');?> <?php echo format_currency($product->price); ?></span>
 						<span class="price_column"><?php echo lang('product_column_price');?> <?php echo format_currency($product->$price_col); ?></span>
 					<?php else: ?>
 						<span class="price_reg"><?php echo lang('product_price');?> <?php echo format_currency($product->price); ?></span>
